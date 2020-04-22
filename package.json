@@ -1,5 +1,5 @@
 {
-  "name": "codekommmit",
+  "name": "kommmit",
   "version": "1.0.0",
   "description": "small tool for making code commit less awful",
   "main": "index.js",
@@ -13,6 +13,6 @@
     "moment": "^2.24.0"
   },
   "bin": {
-    "kommit": "./index.js"
+    "kommmit": "./index.js"
   }
 }
