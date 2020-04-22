@@ -1,0 +1,18 @@
+{
+  "name": "codekommmit",
+  "version": "1.0.0",
+  "description": "small tool for making code commit less awful",
+  "main": "index.js",
+  "author": "Tobias Zimmermann",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.660.0",
+    "colors": "^1.4.0",
+    "commander": "^5.0.0",
+    "inquirer": "^7.1.0",
+    "moment": "^2.24.0"
+  },
+  "bin": {
+    "kommit": "./index.js"
+  }
+}
