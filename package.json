@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "small tool for making code commit less awful",
   "main": "index.js",
+  "repository": "https://github.com/tzdesign/kommmit.git",
   "author": "Tobias Zimmermann",
   "license": "MIT",
   "dependencies": {
