@@ -1,6 +1,6 @@
 {
   "name": "kommmit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "small tool for making code commit less awful",
   "main": "index.js",
   "repository": "https://github.com/tzdesign/kommmit.git",
@@ -8,6 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.660.0",
+    "cli-spinner": "^0.2.10",
+    "cli-table": "^0.3.1",
     "colors": "^1.4.0",
     "commander": "^5.0.0",
     "inquirer": "^7.1.0",
