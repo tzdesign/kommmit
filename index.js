@@ -48,7 +48,8 @@ program
   );
 
 program
-  .command("request", "Create a new pull request")
+  .command("request")
+  .description("Create a new pull request")
   .action(async (_, { region }) => {
     const branches = execSync("git branch -r --no-color")
       .toString()
@@ -108,7 +109,8 @@ program
   });
 
 program
-  .command("show <id>", "Open the pull request in the browser")
+  .command("show <id>")
+  .description("Open the pull request in the browser")
   .action((id) => {
     const { region } = program;
     execSync(
@@ -120,10 +122,8 @@ program
  * LIST
  */
 program
-  .command(
-    "list",
-    "Lists all pull request (Default presents current branch only)"
-  )
+  .command("list")
+  .description("List all pull requests")
   .option("-o, --open", "list only open request")
   .option("-d, --show-description", "show the description", false)
   .option("-m, --max <number>", "limit for requests", 10)
