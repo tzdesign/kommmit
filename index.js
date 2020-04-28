@@ -50,7 +50,7 @@ program
 program
   .command("request")
   .description("Create a new pull request")
-  .action(async (_, { region }) => {
+  .action(async () => {
     const branches = execSync("git branch -r --no-color")
       .toString()
       .split("\n")
