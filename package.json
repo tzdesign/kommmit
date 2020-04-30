@@ -13,7 +13,8 @@
     "colors": "^1.4.0",
     "commander": "^5.0.0",
     "inquirer": "^7.1.0",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "term-size": "^2.2.0"
   },
   "bin": {
     "kommmit": "./index.js"
