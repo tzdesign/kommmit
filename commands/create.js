@@ -7,7 +7,9 @@ const { program } = require("commander");
 program
   .command("create")
   .description("Create a new pull request")
-  .action(async () => {
+  .option("-t, --target-branch <string>", "target branch for pull request", "master")
+  .action(async ({targetBranch}) => {
+    
     const branches = execSync("git branch -r --no-color")
       .toString()
       .split("\n")
@@ -45,6 +47,12 @@ program
               .toString()
               .trim(),
         },
+        {
+          name: "confirmed",
+          message: ({ branch }) =>
+            `ready to add pull-request ${branch} » ${targetBranch}`,
+          type: "confirm",
+        },
       ])
       .then(async ({ branch, title, description }) => {
         var params = {
@@ -52,7 +60,7 @@ program
             {
               repositoryName: repo,
               sourceReference: branch,
-              destinationReference: "master",
+              destinationReference: targetBranch,
             },
           ],
           title,

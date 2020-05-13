@@ -23,8 +23,8 @@ Simple utility for codecommit. Pull-Request focused
 
 ### Commands:
 
-* show <id>              Open the pull request in the browser
-*  list [options]         List all pull requests
-*  create                 Create a new pull request
-*  close <id>             close a pull request
-*  help [command]         display help for command
+* **show** <id>              Open the pull request in the browser
+* **list** [options]         List all pull requests
+* **create**                 Create a new pull request
+* **close** <id>             close a pull request
+* **help** [command]         display help for command
