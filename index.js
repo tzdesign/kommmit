@@ -5,8 +5,6 @@ const { program } = require("commander");
 
 const { AWS_DEFAULT_REGION } = process.env;
 
-require("./precheck");
-
 program
   .name("kommit 🔥")
   .description("Simple utility for codecommit. Pull-Request focused")
