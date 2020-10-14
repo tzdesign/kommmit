@@ -3,21 +3,25 @@ const inquirer = require("inquirer");
 const { execSync } = require("child_process");
 const { repo } = require("../utils/info");
 const { program } = require("commander");
+const opn = require("open");
 
 program
   .command("create")
   .description("Create a new pull request")
-  .option("-t, --target-branch <string>", "target branch for pull request", "master")
-  .action(async ({targetBranch}) => {
-    
+  .option(
+    "-t, --target-branch <string>",
+    "target branch for pull request",
+    "master"
+  )
+  .action(async ({ targetBranch }) => {
     const branches = execSync("git branch -r --no-color")
       .toString()
       .split("\n")
-      .map((name) => name.trim().replace("origin/", ""))
-      .filter((name) => /remotes\/.*/g.test(name) === false)
-      .filter((name) => /\*/g.test(name) === false)
-      .filter((name) => /HEAD/g.test(name) === false)
-      .filter((name) => name !== "" && name !== "master");
+      .map(name => name.trim().replace("origin/", ""))
+      .filter(name => /remotes\/.*/g.test(name) === false)
+      .filter(name => /\*/g.test(name) === false)
+      .filter(name => /HEAD/g.test(name) === false)
+      .filter(name => name !== "" && name !== "master");
 
     inquirer
       .prompt([
@@ -54,7 +58,11 @@ program
           type: "confirm",
         },
       ])
-      .then(async ({ branch, title, description }) => {
+      .then(async ({ branch, title, description, confirmed }) => {
+        if (confirmed === false) {
+          return;
+        }
+
         var params = {
           targets: [
             {
@@ -69,6 +77,25 @@ program
         const { region } = program;
         const cc = new AWS.CodeCommit({ region });
         const creation = await cc.createPullRequest(params).promise();
-        console.log(creation);
+
+        inquirer
+          .prompt([
+            {
+              name: "open",
+              message: ({ branch }) => `Open the PR in the browser?`,
+              type: "confirm",
+            },
+          ])
+          .then(async ({ open }) => {
+            const {
+              pullRequest: { pullRequestId: id },
+            } = creation;
+            
+            if (open) {
+              opn(
+                `https://${region}.console.aws.amazon.com/codesuite/codecommit/repositories/${repo}/pull-requests/${id}/details?region=${region}`
+              );
+            }
+          });
       });
   });
