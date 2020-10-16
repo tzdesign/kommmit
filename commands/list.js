@@ -10,7 +10,7 @@ const spinner = new (require("cli-spinner").Spinner)();
 program
   .command("list")
   .description("List all pull requests")
-  .option("-o, --open", "list only open request")
+  .option("-o, --open", "list only open request",false)
   .option("-d, --show-description", "show the description", false)
   .option("-m, --max <number>", "limit for requests", 10)
   .option(
@@ -19,10 +19,7 @@ program
     false
   )
   .action(async ({ open, max, showDescription, allBranches }) => {
-    let pullRequestStatus = undefined;
-    if (open !== undefined) {
-      pullRequestStatus = open ? "OPEN" : "CLOSED";
-    }
+    let pullRequestStatus =  open ? "OPEN" : undefined;
 
     const { region } = program;
     const cc = new AWS.CodeCommit({ region });
