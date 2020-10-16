@@ -1,7 +1,7 @@
 const AWS = require("aws-sdk");
 const inquirer = require("inquirer");
 const { execSync } = require("child_process");
-const { repo } = require("../utils/info");
+const { repo, branch } = require("../utils/info");
 const { program } = require("commander");
 const opn = require("open");
 
@@ -21,7 +21,9 @@ program
       .filter(name => /remotes\/.*/g.test(name) === false)
       .filter(name => /\*/g.test(name) === false)
       .filter(name => /HEAD/g.test(name) === false)
-      .filter(name => name !== "" && name !== "master");
+      .filter(name => name !== "" && name !== "master")
+      .sort((a,b) => a === branch ? -1 : a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'}));
+
 
     inquirer
       .prompt([
@@ -90,7 +92,7 @@ program
             const {
               pullRequest: { pullRequestId: id },
             } = creation;
-            
+
             if (open) {
               opn(
                 `https://${region}.console.aws.amazon.com/codesuite/codecommit/repositories/${repo}/pull-requests/${id}/details?region=${region}`
