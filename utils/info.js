@@ -4,7 +4,7 @@ const { execSync } = require("child_process");
 let repo = "";
 let branch = "";
 try {
-  repo = execSync("git rev-parse --show-toplevel")
+  repo = execSync("git config --get remote.origin.url")
     .toString()
     .trim()
     .split("/")
